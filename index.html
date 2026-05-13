@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Naveen R G — Tech Enthusiast. AI, Linux, Development, Automation.">
+<title>Naveen R G — Tech Enthusiast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-text">INITIALIZING PORTFOLIO</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-num" id="loader-num">0%</div>
+</div>
+
+<!-- Aurora -->
+<div class="aurora aurora-1"></div>
+<div class="aurora aurora-2"></div>
+<div class="aurora aurora-3"></div>
+<div class="grid-overlay"></div>
+
+<!-- Canvas Particles -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">NRG</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's Talk</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#skills" class="mobile-link">Skills</a>
+  <a href="#projects" class="mobile-link">Projects</a>
+  <a href="#experience" class="mobile-link">Experience</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">Available for opportunities</div>
+      <h1 class="hero-name">Naveen </h1>
+      <div class="hero-title">Tech Enthusiast</div>
+      <div class="hero-typing" id="typing-el"></div>
+      <p class="hero-desc">
+        Passionate and self-driven developer exploring the frontiers of <strong style="color:var(--text)">AI</strong>, 
+        <strong style="color:var(--text)">Linux</strong>, and <strong style="color:var(--text)">system-level computing</strong>. 
+        Building real solutions through code and automation.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="https://drive.google.com/drive/u/1/folders/1cpK98Br1lfZncwr0Gj8d51-Kws_Efy36" target="_blank" class="btn-secondary">Download Resume</a>
+        <a href="#contact" class="btn-secondary">Contact Me</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-inner" id="tilt-card">
+        <div class="hero-avatar">N</div>
+        <div class="card-name">Naveen R G</div>
+        <div class="card-role">// Tech Enthusiast</div>
+        <div class="card-stats">
+          <div class="card-stat">
+            <div class="stat-val">3+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="card-stat">
+            <div class="stat-val">8.0</div>
+            <div class="stat-label">CGPA</div>
+          </div>
+          <div class="card-stat">
+            <div class="stat-val">AI</div>
+            <div class="stat-label">Focus</div>
+          </div>
+          <div class="card-stat">
+            <div class="stat-val">Linux</div>
+            <div class="stat-label">OS</div>
+          </div>
+        </div>
+        <div class="card-badge">Open to Work</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Who I Am</div>
+      <h2 class="section-title gradient-text">About Me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-card reveal reveal-delay-1">
+          <div class="about-card-icon">🤖</div>
+          <div class="about-card-title">AI Explorer</div>
+          <div class="about-card-text">Actively exploring machine learning, automation, and AI-driven development concepts.</div>
+        </div>
+        <div class="about-card reveal reveal-delay-2">
+          <div class="about-card-icon">🐧</div>
+          <div class="about-card-title">Linux Power User</div>
+          <div class="about-card-text">Deep hands-on experience with Ubuntu, Fedora, GNOME customization, and system configs.</div>
+        </div>
+        <div class="about-card reveal reveal-delay-3">
+          <div class="about-card-icon">⚙️</div>
+          <div class="about-card-title">System Thinker</div>
+          <div class="about-card-text">Hardware debugging, software troubleshooting, and system-level problem solving.</div>
+        </div>
+        <div class="about-card reveal reveal-delay-4">
+          <div class="about-card-icon">🚀</div>
+          <div class="about-card-title">Builder</div>
+          <div class="about-card-text">From Flutter apps to web projects — turning ideas into real working products.</div>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <p class="about-bio">
+          I'm a <strong>Computer Science student</strong> at SXCCE (2024–2028) with a CGPA of <strong>8.0</strong>. 
+          Driven by curiosity and persistence, I dive deep into systems — understanding not just how things work, 
+          but <strong>why</strong> they work.
+        </p>
+        <p class="about-bio">
+          I thrive at the intersection of <strong>AI, Linux, development, and automation</strong> — 
+          constantly learning, constantly building, and never afraid to tackle complex problems head-on.
+        </p>
+        <div class="about-tags">
+          <span class="about-tag">AI & ML</span>
+          <span class="about-tag">Linux</span>
+          <span class="about-tag">Python</span>
+          <span class="about-tag">Flutter</span>
+          <span class="about-tag">System Config</span>
+          <span class="about-tag">API Integration</span>
+          <span class="about-tag">Automation</span>
+          <span class="about-tag">Open Source</span>
+        </div>
+        <div class="edu-card">
+          <div class="edu-school">St. Xavier's Catholic College of Engineering</div>
+          <div class="edu-degree">B.E. Computer Science &amp; Engineering</div>
+          <div class="edu-meta">
+            <span>2024–2028</span>
+            <span>CGPA: 8.0</span>
+          </div>
+        </div>
+        <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+          <span class="about-tag">English</span>
+          <span class="about-tag">Tamil</span>
+          <span class="about-tag">German</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">What I Know</div>
+      <h2 class="section-title gradient-text">Skills &amp; Tools</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="skill-group-title">Operating Systems</div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <div class="skill-name"><span class="skill-dot"></span>Linux (Ubuntu)</div>
+            <div class="skill-pct">85%</div>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-w="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <div class="skill-name"><span class="skill-dot"></span>Linux (Fedora)</div>
+            <div class="skill-pct">80%</div>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-w="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <div class="skill-name"><span class="skill-dot"></span>Windows</div>
+            <div class="skill-pct">90%</div>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-w="90"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-2">
+        <div class="skill-group-title">Programming</div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <div class="skill-name"><span class="skill-dot"></span>Python</div>
+            <div class="skill-pct">75%</div>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-w="75"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <div class="skill-name"><span class="skill-dot"></span>C</div>
+            <div class="skill-pct">65%</div>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-w="65"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <div class="skill-name"><span class="skill-dot"></span>Java</div>
+            <div class="skill-pct">50%</div>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-w="50"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-row">
+            <div class="skill-name"><span class="skill-dot"></span>HTML/CSS/JS</div>
+            <div class="skill-pct">80%</div>
+          </div>
+          <div class="skill-bar"><div class="skill-fill" data-w="80"></div></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal reveal-delay-3">
+        <div class="skill-group-title">Tools & Tech</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">GNOME Tweaks</span>
+          <span class="skill-tag">Flutter</span>
+          <span class="skill-tag">System Config</span>
+          <span class="skill-tag">API Integration</span>
+          <span class="skill-tag">Bash/Shell</span>
+          <span class="skill-tag">Vercel</span>
+          <span class="skill-tag">GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="terminal-card reveal reveal-delay-4">
+        <div class="terminal-bar">
+          <div class="term-dot"></div>
+          <div class="term-dot"></div>
+          <div class="term-dot"></div>
+          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text3);margin-left:8px">naveen@arch ~ bash</span>
+        </div>
+        <div class="terminal-body">
+          <div class="term-line"><span class="term-prompt">❯</span><span class="term-cmd">whoami</span></div>
+          <div class="term-line term-out"><span class="term-cyan">naveen_rg</span> — tech enthusiast &amp; builder</div>
+          <div class="term-line" style="margin-top:8px"><span class="term-prompt">❯</span><span class="term-cmd">cat interests.txt</span></div>
+          <div class="term-line term-out">AI · Linux · Development · Automation · System Computing</div>
+          <div class="term-line" style="margin-top:8px"><span class="term-prompt">❯</span><span class="term-cmd">ls projects/</span></div>
+          <div class="term-line term-out"><span class="term-cyan">trading-app/</span>  <span class="term-cyan">spotify-clone/</span>  <span class="term-cyan">portfolio/</span></div>
+          <div class="term-line" style="margin-top:8px"><span class="term-prompt">❯</span><span class="term-cmd">echo $STATUS</span></div>
+          <div class="term-line term-out" style="color:var(--green)">open_to_opportunities=true ✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">What I've Built</div>
+      <h2 class="section-title gradient-text">Projects</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-preview">
+          <div class="project-preview-bg" style="background:linear-gradient(135deg,#0d1b2a,#1a3a5c,#0d2b3f)"></div>
+          <div class="project-emoji">📈</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Trading App</h3>
+          <p class="project-desc">A Flutter-based mobile trading application with real-time data visualization, portfolio tracking, and API integrations for live market feeds.</p>
+          <div class="project-techs">
+            <span class="project-tech">Flutter</span>
+            <span class="project-tech">Dart</span>
+            <span class="project-tech">API</span>
+            <span class="project-tech">Mobile</span>
+          </div>
+          <div class="project-links">
+            <a href="https://drive.google.com/drive/u/1/folders/1cpK98Br1lfZncwr0Gj8d51-Kws_Efy36" target="_blank" class="project-link primary">View Demo</a>
+            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-preview">
+          <div class="project-preview-bg" style="background:linear-gradient(135deg,#0a1628,#1db954,#0a1628)"></div>
+          <div class="project-emoji">🎵</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Spotify Clone</h3>
+          <p class="project-desc">A feature-rich Spotify-inspired music streaming web app with audio upload, playback, and a slick modern UI deployed on Vercel.</p>
+          <div class="project-techs">
+            <span class="project-tech">HTML</span>
+            <span class="project-tech">CSS</span>
+            <span class="project-tech">JavaScript</span>
+            <span class="project-tech">Vercel</span>
+          </div>
+          <div class="project-links">
+            <a href="https://song-uploader-naveen.vercel.app/" target="_blank" class="project-link primary">Live Demo</a>
+            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-preview">
+          <div class="project-preview-bg" style="background:linear-gradient(135deg,#0d0d2b,#00d4ff22,#0d0d2b)"></div>
+          <div class="project-emoji">💼</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Portfolio Website</h3>
+          <p class="project-desc">A personal portfolio website showcasing projects, skills, and experience with a clean, modern design deployed via GitHub Pages.</p>
+          <div class="project-techs">
+            <span class="project-tech">HTML/CSS/JS</span>
+            <span class="project-tech">GitHub Pages</span>
+            <span class="project-tech">Responsive</span>
+          </div>
+          <div class="project-links">
+            <a href="https://naveen-kit.github.io/portfolio/" target="_blank" class="project-link primary">Live Site</a>
+            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">What I've Done</div>
+      <h2 class="section-title gradient-text">Experience</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-badge">Debugging & Troubleshooting</div>
+          <div class="timeline-title">Software & Hardware Debugging</div>
+          <div class="timeline-desc">Hands-on experience diagnosing and resolving both software and hardware issues. Strong ability to identify root causes, analyze system behavior, and implement reliable fixes.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-badge">Independent Learning</div>
+          <div class="timeline-title">Technology Exploration</div>
+          <div class="timeline-desc">Regularly deep-diving into new tools, frameworks, and technologies independently — from Linux internals and GNOME customization to AI frameworks and automation scripts.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-badge">Integration</div>
+          <div class="timeline-title">API Integration & Automation</div>
+          <div class="timeline-desc">Built projects integrating third-party APIs for real-time data, notifications, and automation workflows — bridging services to create seamless user experiences.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-badge">System Administration</div>
+          <div class="timeline-title">Linux System Configuration</div>
+          <div class="timeline-desc">Configured and maintained Linux environments across Ubuntu and Fedora — including kernel tweaks, GNOME desktop customization, shell scripting, and system-level optimization.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Milestones</div>
+      <h2 class="section-title gradient-text">Achievements</h2>
+    </div>
+    <div class="achievements-grid">
+      <div class="achievement-card reveal reveal-delay-1">
+        <div class="achievement-icon">🐧</div>
+        <div class="achievement-val" data-count="2">0</div>
+        <div class="achievement-label">Linux Distros Mastered</div>
+        <div class="achievement-desc">Deep customization experience across Ubuntu and Fedora with advanced GNOME tweaks.</div>
+      </div>
+      <div class="achievement-card reveal reveal-delay-2">
+        <div class="achievement-icon">🔧</div>
+        <div class="achievement-val" style="-webkit-text-fill-color:unset;background:none;color:var(--cyan)">✓</div>
+        <div class="achievement-label">Independent Problem Solver</div>
+        <div class="achievement-desc">Solved real-world hardware and software issues entirely independently — no hand-holding needed.</div>
+      </div>
+      <div class="achievement-card reveal reveal-delay-3">
+        <div class="achievement-icon">🤖</div>
+        <div class="achievement-val" style="-webkit-text-fill-color:unset;background:none;color:var(--violet2)">AI</div>
+        <div class="achievement-label">AI Exploration</div>
+        <div class="achievement-desc">Actively explored AI concepts, tools, and automation frameworks for practical applications.</div>
+      </div>
+      <div class="achievement-card reveal reveal-delay-4">
+        <div class="achievement-icon">🎓</div>
+        <div class="achievement-val">8.0</div>
+        <div class="achievement-label">Academic CGPA</div>
+        <div class="achievement-desc">Maintaining strong academic performance at SXCCE while building real-world projects.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Let's Connect</div>
+      <h2 class="section-title gradient-text">Get In Touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p class="contact-tagline">
+          Have a project in mind, want to collaborate, or just say hi? 
+          I'm always open to exciting opportunities and conversations.
+        </p>
+        <div class="contact-items">
+          <a href="tel:+919361505904" class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-value">+91 9361505904</div>
+            </div>
+          </a>
+          <a href="mailto:naveen.132414@gmail.com" class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value">naveen.132414@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/naveenrg17/" target="_blank" class="contact-item">
+            <div class="contact-item-icon">💼</div>
+            <div>
+              <div class="contact-item-label">LinkedIn</div>
+              <div class="contact-item-value">linkedin.com/in/naveenrg17</div>
+            </div>
+          </a>
+          <div class="contact-item" style="cursor:default">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Location</div>
+              <div class="contact-item-value">Mela Chundavilai, Karungal, India</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-2">
+        <div class="form-field">
+          <input type="text" id="fname" placeholder=" ">
+          <label for="fname">Your Name</label>
+        </div>
+        <div class="form-field">
+          <input type="email" id="femail" placeholder=" ">
+          <label for="femail">Email Address</label>
+        </div>
+        <div class="form-field">
+          <textarea id="fmsg" placeholder=" "></textarea>
+          <label for="fmsg">Your Message</label>
+        </div>
+        <button class="btn-send" onclick="handleSend()">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Naveen R G</div>
+  <div class="footer-copy">© 2025 · Built with passion &amp; code</div>
+  <div class="footer-socials">
+    <a href="mailto:naveen.132414@gmail.com" class="footer-social" title="Email">✉️</a>
+    <a href="https://www.linkedin.com/in/naveenrg17/" target="_blank" class="footer-social" title="LinkedIn">💼</a>
+    <a href="https://github.com/naveen-kit" target="_blank" class="footer-social" title="GitHub">💻</a>
+    <a href="https://naveen-kit.github.io/portfolio/" target="_blank" class="footer-social" title="Portfolio">🌐</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
