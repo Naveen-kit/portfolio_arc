@@ -326,8 +326,10 @@ section { position: relative; z-index: 1; }
 .orbit-dot:nth-child(4) { transform: translateX(-50%) rotate(216deg); }
 .orbit-dot:nth-child(5) { transform: translateX(-50%) rotate(288deg); }
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-card { display: none; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; justify-items: center; text-align: center; }
+  .hero-card { margin: 0 auto; }
+  .hero-left { display: flex; flex-direction: column; align-items: center; }
+  .hero-btns { justify-content: center; }
 }
 
 /* ─── SECTION COMMON ─── */
