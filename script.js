@@ -178,3 +178,35 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// ── BACKGROUND MUSIC ──
+const bgm = document.getElementById('bgm');
+const bgmBtn = document.getElementById('bgm-btn');
+const bgmIcon = document.getElementById('bgm-icon');
+
+if (bgm && bgmBtn && bgmIcon) {
+  let isPlaying = false;
+
+  function toggleBgm() {
+    if (isPlaying) {
+      bgm.pause();
+      bgmIcon.textContent = '🎵';
+    } else {
+      bgm.play().catch(e => console.log('Playback prevented', e));
+      bgmIcon.textContent = '⏸️';
+    }
+    isPlaying = !isPlaying;
+  }
+
+  bgmBtn.addEventListener('click', toggleBgm);
+
+  // Attempt autoplay on load
+  window.addEventListener('load', () => {
+    bgm.play().then(() => {
+      isPlaying = true;
+      bgmIcon.textContent = '⏸️';
+    }).catch(e => {
+      console.log('Autoplay prevented by browser policy. Waiting for user interaction.');
+    });
+  });
+}
