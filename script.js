@@ -25,7 +25,7 @@ function animCursor() {
 animCursor();
 
 // ── TYPING ANIMATION ──
-const phrases = ['AI • Linux • Development', 'Automation • System Computing','Reverse Engineering','Building the Future'];
+const phrases = ['AI • Linux • Development', 'Automation • System Computing','⏪Reverse Engineering','🏗️Building the Future'];
 let pi = 0, ci = 0, del = false;
 const typEl = document.getElementById('typing-el');
 function type() {
