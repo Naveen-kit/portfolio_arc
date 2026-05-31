@@ -63,7 +63,6 @@ function drawParticles() {
     ctx.fillStyle = `rgba(0,212,255,${p.a})`;
     ctx.fill();
   });
-  // connections
   for (let i = 0; i < particles.length; i++) {
     for (let j = i+1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
@@ -92,7 +91,6 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('hidden-nav', s > lastScroll + 5 && s > 200);
   if (s < lastScroll - 5) nav.classList.remove('hidden-nav');
   lastScroll = s;
-  // Active section
   document.querySelectorAll('section[id]').forEach(sec => {
     const top = sec.offsetTop - 100;
     const bot = top + sec.offsetHeight;
@@ -104,9 +102,24 @@ window.addEventListener('scroll', () => {
 // ── MOBILE MENU ──
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+const bloom = document.getElementById('hamburger-bloom');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open');
+
+  // Bloom burst — restart animation on every click
+  bloom.classList.remove('burst');
+  void bloom.offsetWidth; // force reflow to restart
+  bloom.classList.add('burst');
+});
+
+// Close menu when a link is tapped
 document.querySelectorAll('.mobile-link').forEach(l => {
-  l.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  l.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+  });
 });
 
 // ── SCROLL REVEAL ──
@@ -200,7 +213,6 @@ if (bgm && bgmBtn && bgmIcon) {
 
   bgmBtn.addEventListener('click', toggleBgm);
 
-  // Attempt autoplay on load
   window.addEventListener('load', () => {
     bgm.play().then(() => {
       isPlaying = true;
