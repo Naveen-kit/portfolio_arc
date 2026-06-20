@@ -541,12 +541,19 @@ section { position: relative; z-index: 1; }
 .term-dot:nth-child(1) { background: #ff5f56; }
 .term-dot:nth-child(2) { background: #ffbd2e; }
 .term-dot:nth-child(3) { background: #27c93f; }
-.terminal-body { padding: 20px; font-family: var(--font-mono); font-size: 13px; line-height: 2; }
+.terminal-body { padding: 20px; font-family: var(--font-mono); font-size: 13px; line-height: 2; min-height: 180px; }
 .term-line { display: flex; gap: 12px; }
 .term-prompt { color: var(--green); }
 .term-cmd { color: var(--text); }
 .term-out { color: var(--text2); padding-left: 24px; }
 .term-cyan { color: var(--cyan); }
+.term-blink {
+  animation: termBlink 1s step-end infinite;
+}
+@keyframes termBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
 /* ─── PROJECTS ─── */
 #projects { padding: 120px 0; }
@@ -594,6 +601,28 @@ section { position: relative; z-index: 1; }
 }
 .project-link.secondary { border: 1px solid var(--border); color: var(--text2); background: transparent; }
 .project-link.secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* ─── LUFFY PARALLAX ─── */
+.luffy-float {
+  position: absolute;
+  left: -27px;
+  top: 0;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 2;
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.luffy-float.gear5 {
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 255, 255, 0.3);
+}
 
 /* ─── EXPERIENCE ─── */
 #experience { padding: 120px 0; }

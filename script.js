@@ -160,6 +160,100 @@ const achObs = new IntersectionObserver((e) => {
 const achSection = document.getElementById('achievements');
 if (achSection) achObs.observe(achSection);
 
+// ── TERMINAL TYPEWRITER ON SCROLL ──
+const terminalBody = document.getElementById('terminal-body');
+const terminalSequence = [
+  { type: 'cmd', text: 'whoami' },
+  { type: 'out', html: '<span class="term-cyan">naveen_rg</span> — tech enthusiast &amp; builder' },
+  { type: 'cmd', text: 'cat interests.txt' },
+  { type: 'out', html: 'AI · Linux · Development · Automation · System Computing' },
+  { type: 'cmd', text: 'ls projects/' },
+  { type: 'out', html: '<span class="term-cyan">trading-app/</span>  <span class="term-cyan">spotify-clone/</span>  <span class="term-cyan">portfolio/</span>' },
+  { type: 'cmd', text: 'echo $STATUS' },
+  { type: 'out', html: '<span style="color:var(--green)">open_to_opportunities=true ✓</span>' },
+];
+
+let terminalPlayed = false;
+
+function typeCommand(cmdSpan, text, cb) {
+  let i = 0;
+  function tick() {
+    if (i <= text.length) {
+      cmdSpan.textContent = text.slice(0, i);
+      i++;
+      setTimeout(tick, 45 + Math.random() * 35);
+    } else {
+      if (cb) cb();
+    }
+  }
+  tick();
+}
+
+function playTerminal() {
+  if (terminalPlayed || !terminalBody) return;
+  terminalPlayed = true;
+
+  let stepIndex = 0;
+
+  function nextStep() {
+    if (stepIndex >= terminalSequence.length) {
+      return;
+    }
+
+    const step = terminalSequence[stepIndex];
+
+    if (step.type === 'cmd') {
+      const line = document.createElement('div');
+      line.className = 'term-line';
+      if (stepIndex > 0) line.style.marginTop = '8px';
+      const prompt = document.createElement('span');
+      prompt.className = 'term-prompt';
+      prompt.textContent = '❯';
+      const cmdSpan = document.createElement('span');
+      cmdSpan.className = 'term-cmd';
+      line.appendChild(prompt);
+      line.appendChild(cmdSpan);
+      terminalBody.appendChild(line);
+
+      typeCommand(cmdSpan, step.text, () => {
+        stepIndex++;
+        setTimeout(nextStep, 200);
+      });
+    } else if (step.type === 'out') {
+      const line = document.createElement('div');
+      line.className = 'term-line term-out';
+      line.style.opacity = '0';
+      line.style.transform = 'translateY(4px)';
+      line.innerHTML = step.html;
+      terminalBody.appendChild(line);
+
+      // Fade in the output
+      requestAnimationFrame(() => {
+        line.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        line.style.opacity = '1';
+        line.style.transform = 'translateY(0)';
+      });
+
+      stepIndex++;
+      setTimeout(nextStep, 400);
+    }
+  }
+
+  nextStep();
+}
+
+const termObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !terminalPlayed) {
+      playTerminal();
+      termObs.disconnect();
+    }
+  });
+}, { threshold: 0.4 });
+
+const termCard = document.querySelector('.terminal-card');
+if (termCard) termObs.observe(termCard);
+
 // ── TILT CARD ──
 const tiltCard = document.getElementById('tilt-card');
 if (tiltCard) {
@@ -181,6 +275,45 @@ function handleSend() {
   const msg = document.getElementById('fmsg').value;
   if (!name || !email || !msg) { alert('Please fill all fields.'); return; }
   window.location.href = `mailto:naveen.132414@gmail.com?subject=Portfolio Contact from ${name}&body=${encodeURIComponent(msg + '\n\nFrom: ' + name + ' <' + email + '>')}`;
+}
+
+// ── LUFFY PARALLAX SCROLL ──
+const luffyEl = document.getElementById('luffy-float');
+const timeline = document.getElementById('timeline');
+let isGear5 = false;
+if (luffyEl && timeline) {
+  window.addEventListener('scroll', () => {
+    const rect = timeline.getBoundingClientRect();
+    const timelineH = timeline.offsetHeight;
+    const viewH = window.innerHeight;
+
+    // Calculate how far through the timeline we've scrolled (0 to 1)
+    const progress = Math.min(Math.max((viewH - rect.top) / (timelineH + viewH), 0), 1);
+
+    // Move Luffy from top (0) to bottom of timeline
+    const luffyTop = progress * (timelineH - 40);
+    luffyEl.style.top = luffyTop + 'px';
+
+    // Swap to Gear 5 at ~80% scroll
+    if (progress >= 0.8 && !isGear5) {
+      isGear5 = true;
+      luffyEl.classList.add('gear5');
+      luffyEl.style.transform = 'scale(0)';
+      setTimeout(() => {
+        luffyEl.src = 'luffy_gear5.jpg';
+        luffyEl.style.transform = 'scale(1.3)';
+        setTimeout(() => { luffyEl.style.transform = 'scale(1)'; }, 200);
+      }, 150);
+    } else if (progress < 0.8 && isGear5) {
+      isGear5 = false;
+      luffyEl.classList.remove('gear5');
+      luffyEl.style.transform = 'scale(0)';
+      setTimeout(() => {
+        luffyEl.src = 'luffy.jpg';
+        luffyEl.style.transform = 'scale(1)';
+      }, 150);
+    }
+  });
 }
 
 // ── SMOOTH SCROLL ──
