@@ -107,11 +107,14 @@ const bloom = document.getElementById('hamburger-bloom');
 hamburger.addEventListener('click', () => {
   const isOpen = mobileMenu.classList.toggle('open');
   hamburger.classList.toggle('open');
+  document.body.classList.toggle('menu-open', isOpen);
 
   // Bloom burst — restart animation on every click
-  bloom.classList.remove('burst');
-  void bloom.offsetWidth; // force reflow to restart
-  bloom.classList.add('burst');
+  if (bloom) {
+    bloom.classList.remove('burst');
+    void bloom.offsetWidth; // force reflow to restart
+    bloom.classList.add('burst');
+  }
 });
 
 // Close menu when a link is tapped
@@ -119,6 +122,7 @@ document.querySelectorAll('.mobile-link').forEach(l => {
   l.addEventListener('click', () => {
     mobileMenu.classList.remove('open');
     hamburger.classList.remove('open');
+    document.body.classList.remove('menu-open');
   });
 });
 
@@ -145,18 +149,23 @@ document.querySelectorAll('.skill-group').forEach(g => skillObs.observe(g));
 function animateCounters() {
   document.querySelectorAll('.achievement-val[data-count]').forEach(el => {
     const target = parseInt(el.dataset.count);
+    if (isNaN(target)) return;
     let cur = 0;
+    el.textContent = '0';
+    const delay = 500; // 500ms pause on each number
     const step = () => {
-      cur = Math.min(cur + 1, target);
+      cur++;
       el.textContent = cur;
-      if (cur < target) setTimeout(step, 200);
+      if (cur < target) setTimeout(step, delay);
     };
-    step();
+    setTimeout(step, delay); // wait 700ms before going from 0 → 1
   });
 }
-const achObs = new IntersectionObserver((e) => {
-  if (e[0].isIntersecting) { animateCounters(); achObs.disconnect(); }
-}, { threshold: .4 });
+const achObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCounters(); achObs.disconnect(); }
+  });
+}, { threshold: .1 });
 const achSection = document.getElementById('achievements');
 if (achSection) achObs.observe(achSection);
 
@@ -325,13 +334,16 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── BACKGROUND MUSIC ──
+// ── BACKGROUND MUSIC + SONG PICKER ──
 const bgm = document.getElementById('bgm');
 const bgmBtn = document.getElementById('bgm-btn');
 const bgmIcon = document.getElementById('bgm-icon');
+const songPicker = document.getElementById('song-picker');
 
-if (bgm && bgmBtn && bgmIcon) {
+if (bgm && bgmBtn && bgmIcon && songPicker) {
   let isPlaying = false;
+  let longPressTimer = null;
+  let didLongPress = false;
 
   function toggleBgm() {
     if (isPlaying) {
@@ -344,8 +356,99 @@ if (bgm && bgmBtn && bgmIcon) {
     isPlaying = !isPlaying;
   }
 
-  bgmBtn.addEventListener('click', toggleBgm);
+  function openPicker() {
+    songPicker.classList.add('open');
+  }
 
+  function closePicker() {
+    songPicker.classList.remove('open');
+  }
+
+  // ── Long-press detection (works for mouse + touch) ──
+  function startPress(e) {
+    didLongPress = false;
+    longPressTimer = setTimeout(() => {
+      didLongPress = true;
+      openPicker();
+    }, 500);
+  }
+
+  function endPress(e) {
+    clearTimeout(longPressTimer);
+    // If it was a short tap (not long-press), toggle play/pause
+    if (!didLongPress) {
+      toggleBgm();
+    }
+  }
+
+  function cancelPress() {
+    clearTimeout(longPressTimer);
+  }
+
+  // Mouse events
+  bgmBtn.addEventListener('mousedown', startPress);
+  bgmBtn.addEventListener('mouseup', endPress);
+  bgmBtn.addEventListener('mouseleave', cancelPress);
+
+  // Touch events (mobile)
+  bgmBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    startPress(e);
+  }, { passive: false });
+  bgmBtn.addEventListener('touchend', endPress);
+  bgmBtn.addEventListener('touchcancel', cancelPress);
+
+  // ── Song picker item clicks ──
+  document.querySelectorAll('.song-picker-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const src = item.dataset.src;
+      if (!src) return;
+
+      // Update active state
+      document.querySelectorAll('.song-picker-item').forEach(i => {
+        i.classList.remove('active');
+        i.classList.remove('wave-active');
+        const oldWave = i.querySelector('.song-picker-wave');
+        if (oldWave) oldWave.remove();
+      });
+      item.classList.add('active');
+
+      // Wave effect for 1.5s
+      item.classList.add('wave-active');
+      const wave = document.createElement('div');
+      wave.className = 'song-picker-wave';
+      for (let i = 0; i < 5; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar';
+        wave.appendChild(bar);
+      }
+      item.appendChild(wave);
+
+      // Switch track
+      const wasPlaying = isPlaying;
+      bgm.pause();
+      bgm.src = src;
+      bgm.load();
+
+      if (wasPlaying) {
+        bgm.play().then(() => {
+          isPlaying = true;
+          bgmIcon.textContent = '⏸️';
+        }).catch(e => console.log('Playback prevented', e));
+      }
+
+      closePicker();
+    });
+  });
+
+  // Close picker when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!songPicker.contains(e.target) && !bgmBtn.contains(e.target)) {
+      closePicker();
+    }
+  });
+
+  // Autoplay on load
   window.addEventListener('load', () => {
     bgm.play().then(() => {
       isPlaying = true;

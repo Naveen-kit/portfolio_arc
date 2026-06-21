@@ -58,13 +58,58 @@
   <span id="bgm-icon">🎵</span>
 </button>
 
+<!-- Song Picker (long-press) -->
+<div class="song-picker" id="song-picker">
+  <div class="song-picker-title">Switch Track</div>
+  <button class="song-picker-item active" data-src="My Hero Academia OST - You Say Run.mp3">
+    <span class="song-picker-icon">⚡</span>
+    <span class="song-picker-name">You Say Run</span>
+    <span class="song-picker-artist">My Hero Academia OST</span>
+    <span class="song-picker-playing">♪</span>
+  </button>
+  <button class="song-picker-item" data-src="One Piece Overtaken Epic Version.mp3">
+    <span class="song-picker-icon">🏴‍☠️</span>
+    <span class="song-picker-name">Overtaken</span>
+    <span class="song-picker-artist">One Piece Epic Version</span>
+    <span class="song-picker-playing">♪</span>
+  </button>
+</div>
+
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#about" class="mobile-link">About</a>
-  <a href="#skills" class="mobile-link">Skills</a>
-  <a href="#projects" class="mobile-link">Projects</a>
-  <a href="#experience" class="mobile-link">Experience</a>
-  <a href="#contact" class="mobile-link">Contact</a>
+  <div class="mobile-menu-inner">
+    <a href="#about" class="mobile-link">
+      <span class="mobile-link-num">01</span>
+      <span class="mobile-link-text">About</span>
+      <span class="mobile-link-sub">Who I Am</span>
+      <span class="mobile-link-arrow">→</span>
+    </a>
+    <a href="#skills" class="mobile-link">
+      <span class="mobile-link-num">02</span>
+      <span class="mobile-link-text">Skills</span>
+      <span class="mobile-link-sub">What I Know</span>
+      <span class="mobile-link-arrow">→</span>
+    </a>
+    <a href="#projects" class="mobile-link">
+      <span class="mobile-link-num">03</span>
+      <span class="mobile-link-text">Projects</span>
+      <span class="mobile-link-sub">What I've Built</span>
+      <span class="mobile-link-arrow">→</span>
+    </a>
+    <a href="#experience" class="mobile-link">
+      <span class="mobile-link-num">04</span>
+      <span class="mobile-link-text">Experience</span>
+      <span class="mobile-link-sub">What I've Done</span>
+      <span class="mobile-link-arrow">→</span>
+    </a>
+    <a href="#contact" class="mobile-link">
+      <span class="mobile-link-num">05</span>
+      <span class="mobile-link-text">Contact</span>
+      <span class="mobile-link-sub">Let's Connect</span>
+      <span class="mobile-link-arrow">→</span>
+    </a>
+  </div>
+  <div class="mobile-menu-bottom-glow"></div>
 </div>
 
 <!-- HERO -->
@@ -95,7 +140,7 @@
         <div class="card-role">// Tech Enthusiast</div>
         <div class="card-stats">
           <div class="card-stat">
-            <div class="stat-val">3+</div>
+            <div class="stat-val">4+</div>
             <div class="stat-label">Projects</div>
           </div>
           <div class="card-stat">
@@ -349,6 +394,29 @@
           </div>
           <div class="project-links">
             <a href="https://naveen-kit.github.io/portfolio/" target="_blank" class="project-link primary">Live Site</a>
+            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-4">
+        <div class="project-preview">
+          <div class="project-preview-bg" style="background:linear-gradient(135deg,#1a0a2e,#7c3aed,#1a0a2e)"></div>
+          <div class="project-emoji">🎶</div>
+        </div>
+        <div class="project-body">
+          <h3 class="project-title">Rhythmix</h3>
+          <p class="project-desc">An industry-grade music streaming app built with Flutter featuring C++ audio engine via FFI, BLoC state management, Hive local storage, clean architecture with playlists, equalizer, lyrics, and downloads.</p>
+          <div class="project-techs">
+            <span class="project-tech">Flutter</span>
+            <span class="project-tech">Dart</span>
+            <span class="project-tech">C++ FFI</span>
+            <span class="project-tech">BLoC</span>
+            <span class="project-tech">Hive</span>
+            <span class="project-tech">Dio</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/naveen-kit" target="_blank" class="project-link primary">View Project</a>
             <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
           </div>
         </div>
