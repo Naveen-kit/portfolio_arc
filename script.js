@@ -339,8 +339,7 @@ if (tiltCard) {
 
       // Show hint
       if (clickHint) {
-        const remaining = 5 - cardClickCount;
-        clickHint.textContent = remaining === 1 ? '1 more click...' : `${remaining} more clicks...`;
+        clickHint.textContent = 'stay bro';
         clickHint.classList.add('visible');
       }
     }
