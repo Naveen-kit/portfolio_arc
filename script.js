@@ -345,26 +345,27 @@ if (tiltCard) {
       }
     }
 
-    if (cardClickCount >= 5) {
-      // ── TRIGGER: 5th click! ──
-      isSpinning = true;
-      cardClickCount = 0;
-      clearTimeout(cardClickTimer);
-      if (clickHint) { clickHint.textContent = '✨ SOURCE CODE UNLOCKED ✨'; }
-
-      // Disable tilt during spin
-      tiltCard.style.transform = '';
-
-      // Trigger 3D spin animation
-      tiltCard.classList.add('spin-3d');
-
-      // After spin completes, start download
-      setTimeout(() => {
-        tiltCard.classList.remove('spin-3d', 'click-1', 'click-2', 'click-3', 'click-4');
-        if (clickHint) { clickHint.classList.remove('visible'); clickHint.textContent = ''; }
-        downloadSourceCode();
-      }, 1800);
-    }
+    // ── TEMPORARILY DISABLED: 5-click source code download ──
+    // if (cardClickCount >= 5) {
+    //   // ── TRIGGER: 5th click! ──
+    //   isSpinning = true;
+    //   cardClickCount = 0;
+    //   clearTimeout(cardClickTimer);
+    //   if (clickHint) { clickHint.textContent = '✨ SOURCE CODE UNLOCKED ✨'; }
+    //
+    //   // Disable tilt during spin
+    //   tiltCard.style.transform = '';
+    //
+    //   // Trigger 3D spin animation
+    //   tiltCard.classList.add('spin-3d');
+    //
+    //   // After spin completes, start download
+    //   setTimeout(() => {
+    //     tiltCard.classList.remove('spin-3d', 'click-1', 'click-2', 'click-3', 'click-4');
+    //     if (clickHint) { clickHint.classList.remove('visible'); clickHint.textContent = ''; }
+    //     downloadSourceCode();
+    //   }, 1800);
+    // }
   });
 
   // ─── HOVER GLOW EFFECT: 5 seconds ───
