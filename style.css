@@ -486,10 +486,40 @@ section { position: relative; z-index: 1; }
   font-family: var(--font-display); font-size: 32px; font-weight: 800; color: #000;
   box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px rgba(0,212,255,0.4);
   overflow: hidden; position: relative;
+  transition: box-shadow .4s ease, filter .4s ease;
 }
 .hero-avatar::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15));
+}
+.hero-avatar.glow-active {
+  box-shadow: 
+    0 0 0 3px var(--bg),
+    0 0 0 5px rgba(0,212,255,0.4),
+    0 0 20px rgba(0,212,255,0.5),
+    0 0 40px rgba(124,58,237,0.4),
+    inset 0 0 20px rgba(0,212,255,0.2);
+  filter: brightness(1.2);
+  animation: avatar-glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes avatar-glow-pulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 0 3px var(--bg),
+      0 0 0 5px rgba(0,212,255,0.4),
+      0 0 20px rgba(0,212,255,0.5),
+      0 0 40px rgba(124,58,237,0.4),
+      inset 0 0 20px rgba(0,212,255,0.2);
+  }
+  50% { 
+    box-shadow: 
+      0 0 0 3px var(--bg),
+      0 0 0 5px rgba(0,212,255,0.6),
+      0 0 30px rgba(0,212,255,0.7),
+      0 0 60px rgba(124,58,237,0.6),
+      inset 0 0 30px rgba(0,212,255,0.3);
+  }
 }
 .card-name {
   font-family: var(--font-display); font-weight: 700; font-size: 17px;

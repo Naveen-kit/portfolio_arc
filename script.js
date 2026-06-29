@@ -367,6 +367,26 @@ if (tiltCard) {
     }
   });
 
+  // ─── HOVER GLOW EFFECT: 5 seconds ───
+  const heroCard = document.querySelector('.hero-card');
+  const heroAvatar = document.querySelector('.hero-avatar');
+  let hoverGlowTimer = null;
+
+  if (heroCard && heroAvatar) {
+    heroCard.addEventListener('mouseenter', () => {
+      // Start 5-second timer on hover
+      hoverGlowTimer = setTimeout(() => {
+        heroAvatar.classList.add('glow-active');
+      }, 5000);
+    });
+
+    heroCard.addEventListener('mouseleave', () => {
+      // Clear timer and remove glow on hover exit
+      clearTimeout(hoverGlowTimer);
+      heroAvatar.classList.remove('glow-active');
+    });
+  }
+
   async function downloadSourceCode() {
     const overlay = document.getElementById('source-download-overlay');
     const bar = document.getElementById('source-download-bar');
