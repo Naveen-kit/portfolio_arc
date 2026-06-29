@@ -31,8 +31,10 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   overflow-x: hidden;
-  cursor: none;
   -webkit-font-smoothing: antialiased;
+}
+body.hide-cursor, body.hide-cursor * {
+  cursor: none;
 }
 
 /* ─── CUSTOM CURSOR ─── */
@@ -108,7 +110,7 @@ nav.hidden-nav { transform: translateY(-100%); }
   font-family: var(--font-display); font-weight: 800;
   font-size: 20px; letter-spacing: -.02em;
   background: linear-gradient(135deg, var(--cyan), var(--violet2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
   text-decoration: none;
 }
 .nav-links {
@@ -406,7 +408,7 @@ section { position: relative; z-index: 1; }
   font-size: clamp(48px, 7vw, 100px); line-height: 1;
   letter-spacing: -.04em; margin-bottom: 16px;
   background: linear-gradient(135deg, #ffffff 0%, #c8d8f0 40%, var(--cyan) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
   animation: fadeSlideUp 1s .5s both;
 }
 .hero-title {
@@ -506,7 +508,7 @@ section { position: relative; z-index: 1; }
 .stat-val {
   font-family: var(--font-display); font-size: 18px; font-weight: 800;
   background: linear-gradient(135deg, var(--cyan), var(--violet2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
 }
 .stat-label {
   font-family: var(--font-mono); font-size: 9px; color: var(--text3);
@@ -547,7 +549,7 @@ section { position: relative; z-index: 1; }
 }
 .gradient-text {
   background: linear-gradient(135deg, var(--text), var(--cyan));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
 }
 
 /* ─── ABOUT ─── */
@@ -810,7 +812,7 @@ section { position: relative; z-index: 1; }
 .achievement-val {
   font-family: var(--font-display); font-size: 40px; font-weight: 800;
   background: linear-gradient(135deg, var(--cyan), var(--violet2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
   margin-bottom: 8px;
 }
 .achievement-label {
@@ -888,7 +890,7 @@ footer {
   font-family: var(--font-display); font-weight: 800; font-size: 18px;
   letter-spacing: -.02em;
   background: linear-gradient(135deg, var(--cyan), var(--violet2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
 }
 .footer-copy { font-family: var(--font-mono); font-size: 11px; color: var(--text3); letter-spacing: .08em; }
 .footer-socials { display: flex; gap: 16px; }
@@ -1135,3 +1137,144 @@ footer {
 /* ─── MISC UTILS ─── */
 .mt-2 { margin-top: 8px; }
 .mt-4 { margin-top: 16px; }
+
+/* ─── 5-CLICK CARD EASTER EGG ─── */
+
+/* Click counter hint tooltip */
+.card-click-hint {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cyan);
+  letter-spacing: .1em;
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+  white-space: nowrap;
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+.card-click-hint.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Card glow intensifies with clicks */
+.hero-card-inner.click-1 { box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 20px rgba(0,212,255,0.15); }
+.hero-card-inner.click-2 { box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 35px rgba(0,212,255,0.25); }
+.hero-card-inner.click-3 { box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 50px rgba(0,212,255,0.35), 0 0 15px rgba(124,58,237,0.2); }
+.hero-card-inner.click-4 { box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(0,212,255,0.45), 0 0 30px rgba(124,58,237,0.3); border-color: rgba(0,212,255,0.4); }
+
+/* 3D spin animation on 5th click */
+@keyframes card-spin-3d {
+  0%   { transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1); }
+  15%  { transform: perspective(800px) rotateY(90deg) rotateX(10deg) scale(0.9); }
+  30%  { transform: perspective(800px) rotateY(180deg) rotateX(0deg) scale(0.85); }
+  50%  { transform: perspective(800px) rotateY(360deg) rotateX(-10deg) scale(0.9); }
+  65%  { transform: perspective(800px) rotateY(540deg) rotateX(5deg) scale(0.95); }
+  80%  { transform: perspective(800px) rotateY(680deg) rotateX(0deg) scale(1.05); }
+  90%  { transform: perspective(800px) rotateY(710deg) rotateX(-3deg) scale(1.08); }
+  100% { transform: perspective(800px) rotateY(720deg) rotateX(0deg) scale(1); }
+}
+
+.hero-card-inner.spin-3d {
+  animation: card-spin-3d 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  box-shadow:
+    0 32px 80px rgba(0,0,0,0.6),
+    0 0 80px rgba(0,212,255,0.6),
+    0 0 40px rgba(124,58,237,0.4),
+    inset 0 0 30px rgba(0,212,255,0.1);
+  border-color: rgba(0,212,255,0.6);
+}
+
+/* Sparkle burst on the card during spin */
+@keyframes sparkle-burst {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(0); }
+  50%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(3); }
+}
+.hero-card-inner.spin-3d::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  border-radius: 24px;
+  background: radial-gradient(circle, rgba(0,212,255,0.3) 0%, rgba(124,58,237,0.2) 40%, transparent 70%);
+  animation: sparkle-burst 1.2s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Source code download overlay */
+.source-download-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(3, 5, 8, 0.92);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .5s, visibility .5s;
+}
+.source-download-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.source-download-box {
+  text-align: center;
+  padding: 48px 56px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 24px;
+  box-shadow: 0 0 60px rgba(0,212,255,0.15), 0 32px 80px rgba(0,0,0,0.5);
+  max-width: 420px;
+  width: 90vw;
+}
+.source-download-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  animation: float-bounce 1.5s ease-in-out infinite;
+}
+@keyframes float-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.source-download-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 24px;
+  letter-spacing: -.02em;
+}
+.source-download-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.source-download-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyan), var(--violet2));
+  border-radius: 4px;
+  transition: width .3s ease;
+}
+.source-download-status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text3);
+  letter-spacing: .08em;
+}
+
+/* PC only — hide on touch devices */
+@media (pointer: coarse) {
+  .card-click-hint { display: none; }
+}

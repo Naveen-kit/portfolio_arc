@@ -127,7 +127,7 @@
       </p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="https://drive.google.com/drive/u/1/folders/1cpK98Br1lfZncwr0Gj8d51-Kws_Efy36" target="_blank" class="btn-secondary">Download Resume</a>
+        <a href="https://drive.google.com/drive/u/1/folders/1cpK98Br1lfZncwr0Gj8d51-Kws_Efy36" target="_blank" rel="noopener noreferrer" class="btn-secondary">Download Resume</a>
         <a href="#contact" class="btn-secondary">Contact Me</a>
       </div>
     </div>
@@ -157,6 +157,17 @@
           </div>
         </div>
         <div class="card-badge">Open to Work</div>
+        <div class="card-click-hint" id="card-click-hint"></div>
+      </div>
+    </div>
+
+    <!-- Source Code Download Overlay -->
+    <div class="source-download-overlay" id="source-download-overlay">
+      <div class="source-download-box">
+        <div class="source-download-icon">📦</div>
+        <div class="source-download-title">Packaging Source Code...</div>
+        <div class="source-download-bar-wrap"><div class="source-download-bar" id="source-download-bar"></div></div>
+        <div class="source-download-status" id="source-download-status">Fetching assets...</div>
       </div>
     </div>
   </div>
@@ -352,8 +363,8 @@
             <span class="project-tech">Mobile</span>
           </div>
           <div class="project-links">
-            <a href="https://drive.google.com/drive/u/1/folders/1cpK98Br1lfZncwr0Gj8d51-Kws_Efy36" target="_blank" class="project-link primary">View Demo</a>
-            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+            <a href="https://drive.google.com/drive/u/1/folders/1cpK98Br1lfZncwr0Gj8d51-Kws_Efy36" target="_blank" rel="noopener noreferrer" class="project-link primary">View Demo</a>
+            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
           </div>
         </div>
       </div>
@@ -373,8 +384,8 @@
             <span class="project-tech">Vercel</span>
           </div>
           <div class="project-links">
-            <a href="https://song-uploader-naveen.vercel.app/" target="_blank" class="project-link primary">Live Demo</a>
-            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+            <a href="https://song-uploader-naveen.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link primary">Live Demo</a>
+            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
           </div>
         </div>
       </div>
@@ -393,8 +404,8 @@
             <span class="project-tech">Responsive</span>
           </div>
           <div class="project-links">
-            <a href="https://naveen-kit.github.io/portfolio/" target="_blank" class="project-link primary">Live Site</a>
-            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+            <a href="https://naveen-kit.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="project-link primary">Live Site</a>
+            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
           </div>
         </div>
       </div>
@@ -416,8 +427,8 @@
             <span class="project-tech">Dio</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/naveen-kit" target="_blank" class="project-link primary">View Project</a>
-            <a href="https://github.com/naveen-kit" target="_blank" class="project-link secondary">GitHub</a>
+            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link primary">View Project</a>
+            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
           </div>
         </div>
       </div>
@@ -534,7 +545,7 @@
               <div class="contact-item-value">naveen.132414@sxcce.edu.in</div>
             </div>
           </a>
-          <a href="https://www.linkedin.com/in/naveenrg17/" target="_blank" class="contact-item">
+          <a href="https://www.linkedin.com/in/naveenrg17/" target="_blank" rel="noopener noreferrer" class="contact-item">
             <div class="contact-item-icon">💼</div>
             <div>
               <div class="contact-item-label">LinkedIn</div>
@@ -575,12 +586,14 @@
   <div class="footer-copy">© 2026 · Built with passion &amp; code</div>
   <div class="footer-socials">
     <a href="mailto:naveen.132414@gmail.com" class="footer-social" title="Email">✉️</a>
-    <a href="https://www.linkedin.com/in/naveenrg17/" target="_blank" class="footer-social" title="LinkedIn">💼</a>
-    <a href="https://github.com/naveen-kit" target="_blank" class="footer-social" title="GitHub">💻</a>
-    <a href="https://naveen-kit.github.io/portfolio/" target="_blank" class="footer-social" title="Portfolio">🌐</a>
+    <a href="https://www.linkedin.com/in/naveenrg17/" target="_blank" rel="noopener noreferrer" class="footer-social" title="LinkedIn">💼</a>
+    <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="footer-social" title="GitHub">💻</a>
+    <a href="https://naveen-kit.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="footer-social" title="Portfolio">🌐</a>
   </div>
 </footer>
 
+<!-- JSZip for source code download easter egg -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="script.js"></script>
 
 </body>
