@@ -295,76 +295,68 @@ if (tiltCard) {
     tiltCard.style.transform = '';
   });
 
-  // ── 5-CLICK EASTER EGG: 3D SPIN + SOURCE CODE DOWNLOAD ──
+  // ── 3-CLICK DIMENSION TOGGLE ──
   let cardClickCount = 0;
   let cardClickTimer = null;
-  let isSpinning = false;
+  let isDimensionY = false;
   const clickHint = document.getElementById('card-click-hint');
 
-  // List of all portfolio files to include in the ZIP
-  const portfolioFiles = [
-    { path: 'index.html', type: 'text' },
-    { path: 'style.css', type: 'text' },
-    { path: 'script.js', type: 'text' },
-    { path: 'favicon.png', type: 'binary' },
-    { path: 'image.jpg', type: 'binary' },
-    { path: 'luffy.jpg', type: 'binary' },
-    { path: 'luffy_gear5.jpg', type: 'binary' },
-    { path: 'My Hero Academia OST - You Say Run.mp3', type: 'binary' },
-    { path: 'One Piece Overtaken Epic Version.mp3', type: 'binary' },
-  ];
-
-  // PC-only: detect touch device
-  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-
   tiltCard.addEventListener('click', () => {
-    if (isSpinning || isTouchDevice) return;
-
     cardClickCount++;
 
-    // Reset timer — clicks must happen within 3s of each other
+    // Reset timer — clicks must happen within 2s of each other
     clearTimeout(cardClickTimer);
     cardClickTimer = setTimeout(() => {
       cardClickCount = 0;
       tiltCard.classList.remove('click-1', 'click-2', 'click-3', 'click-4');
       if (clickHint) { clickHint.classList.remove('visible'); clickHint.textContent = ''; }
-    }, 3000);
+    }, 2000);
 
     // Remove previous glow classes
     tiltCard.classList.remove('click-1', 'click-2', 'click-3', 'click-4');
 
-    if (cardClickCount < 5) {
+    if (cardClickCount < 3) {
       // Add escalating glow
       tiltCard.classList.add('click-' + cardClickCount);
-
+      
       // Show hint
       if (clickHint) {
-        clickHint.textContent = 'stay bro';
+        clickHint.textContent = cardClickCount === 1 ? 'Switching...' : 'Keep going...';
         clickHint.classList.add('visible');
       }
-    }
+    } else {
+      // 3 clicks reached!
+      cardClickCount = 0;
+      clearTimeout(cardClickTimer);
+      tiltCard.classList.remove('click-1', 'click-2', 'click-3', 'click-4');
+      
+      // Trigger interstellar effect
+      document.body.classList.add('interstellar-active');
+      
+      // Wait for the singularity flash (around 2050ms) to swap backgrounds
+      setTimeout(() => {
+        if (isDimensionY) {
+          document.body.classList.remove('dimension-y');
+          isDimensionY = false;
+          if (clickHint) { clickHint.textContent = 'Dimension X (Normal)'; }
+        } else {
+          document.body.classList.add('dimension-y');
+          isDimensionY = true;
+          if (clickHint) { clickHint.textContent = 'Dimension Y (Image)'; }
+        }
+        
+        if (clickHint) {
+          clickHint.classList.add('visible');
+          setTimeout(() => {
+            clickHint.classList.remove('visible');
+          }, 1500);
+        }
+      }, 2050); // Swap background at the exact flash moment
 
-    // ── TEMPORARILY DISABLED: 5-click source code download ──
-    // if (cardClickCount >= 5) {
-    //   // ── TRIGGER: 5th click! ──
-    //   isSpinning = true;
-    //   cardClickCount = 0;
-    //   clearTimeout(cardClickTimer);
-    //   if (clickHint) { clickHint.textContent = '✨ SOURCE CODE UNLOCKED ✨'; }
-    //
-    //   // Disable tilt during spin
-    //   tiltCard.style.transform = '';
-    //
-    //   // Trigger 3D spin animation
-    //   tiltCard.classList.add('spin-3d');
-    //
-    //   // After spin completes, start download
-    //   setTimeout(() => {
-    //     tiltCard.classList.remove('spin-3d', 'click-1', 'click-2', 'click-3', 'click-4');
-    //     if (clickHint) { clickHint.classList.remove('visible'); clickHint.textContent = ''; }
-    //     downloadSourceCode();
-    //   }, 1800);
-    // }
+      setTimeout(() => {
+        document.body.classList.remove('interstellar-active');
+      }, 3100);
+    }
   });
 
   // ─── HOVER GLOW EFFECT: 5 seconds ───
@@ -500,7 +492,6 @@ function handleSend() {
 // ── LUFFY PARALLAX SCROLL ──
 const luffyEl = document.getElementById('luffy-float');
 const timeline = document.getElementById('timeline');
-let isGear5 = false;
 if (luffyEl && timeline) {
   let timelineH = timeline.offsetHeight;
   window.addEventListener('resize', () => { timelineH = timeline.offsetHeight; });
@@ -515,24 +506,6 @@ if (luffyEl && timeline) {
         const luffyTop = progress * (timelineH - 40);
         luffyEl.style.top = luffyTop + 'px';
 
-        if (progress >= 0.8 && !isGear5) {
-          isGear5 = true;
-          luffyEl.classList.add('gear5');
-          luffyEl.style.transform = 'scale(0)';
-          setTimeout(() => {
-            luffyEl.src = 'luffy_gear5.jpg';
-            luffyEl.style.transform = 'scale(1.3)';
-            setTimeout(() => { luffyEl.style.transform = 'scale(1)'; }, 200);
-          }, 150);
-        } else if (progress < 0.8 && isGear5) {
-          isGear5 = false;
-          luffyEl.classList.remove('gear5');
-          luffyEl.style.transform = 'scale(0)';
-          setTimeout(() => {
-            luffyEl.src = 'luffy.jpg';
-            luffyEl.style.transform = 'scale(1)';
-          }, 150);
-        }
         luffyTicking = false;
       });
       luffyTicking = true;
@@ -662,6 +635,26 @@ if (bgm && bgmBtn && bgmIcon && songPicker) {
       closePicker();
     }
   });
+}
 
-  // Autoplay removed for better UX. User can manually play.
+// ── RESUME MODAL ──
+const resumeBtn = document.getElementById('resume-btn');
+const resumeModal = document.getElementById('resume-modal');
+const resumeModalClose = document.getElementById('resume-modal-close');
+
+if (resumeBtn && resumeModal && resumeModalClose) {
+  resumeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    resumeModal.classList.add('active');
+  });
+
+  resumeModalClose.addEventListener('click', () => {
+    resumeModal.classList.remove('active');
+  });
+
+  resumeModal.addEventListener('click', (e) => {
+    if (e.target === resumeModal) {
+      resumeModal.classList.remove('active');
+    }
+  });
 }

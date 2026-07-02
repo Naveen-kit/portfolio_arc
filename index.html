@@ -127,7 +127,7 @@
       </p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="https://drive.google.com/drive/u/1/folders/1cpK98Br1lfZncwr0Gj8d51-Kws_Efy36" target="_blank" rel="noopener noreferrer" class="btn-secondary">Download Resume</a>
+        <button id="resume-btn" class="btn-secondary">Download Resume</button>
         <a href="#contact" class="btn-secondary">Contact Me</a>
       </div>
     </div>
@@ -385,7 +385,7 @@
           </div>
           <div class="project-links">
             <a href="https://song-uploader-naveen.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link primary">Live Demo</a>
-            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
+            <a href="https://github.com/Naveen-kit/song-uploader" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
           </div>
         </div>
       </div>
@@ -405,7 +405,7 @@
           </div>
           <div class="project-links">
             <a href="https://naveen-kit.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="project-link primary">Live Site</a>
-            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
+            <a href="https://github.com/Naveen-kit/portfolio" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
           </div>
         </div>
       </div>
@@ -427,8 +427,8 @@
             <span class="project-tech">Dio</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link primary">View Project</a>
-            <a href="https://github.com/naveen-kit" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
+            <a href="https://github.com/Naveen-kit/Rhythmix" target="_blank" rel="noopener noreferrer" class="project-link primary">View Project</a>
+            <a href="https://github.com/Naveen-kit/Rhythmix" target="_blank" rel="noopener noreferrer" class="project-link secondary">GitHub</a>
           </div>
         </div>
       </div>
@@ -591,6 +591,31 @@
     <a href="https://naveen-kit.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="footer-social" title="Portfolio">🌐</a>
   </div>
 </footer>
+
+<!-- Resume Modal -->
+<div class="resume-modal-overlay" id="resume-modal">
+  <div class="resume-modal-content">
+    <button class="resume-modal-close" id="resume-modal-close">&times;</button>
+    <h3 class="resume-modal-title">Select Resume Format</h3>
+    <p class="resume-modal-desc">Choose the version you'd like to view. You can download it directly from the viewer.</p>
+    <div class="resume-options">
+      <a href="Naveen_prof.pdf" target="_blank" class="resume-option">
+        <span class="resume-option-icon">✨</span>
+        <div class="resume-option-text">
+          <div class="resume-option-title">Professional Resume</div>
+          <div class="resume-option-sub">Best for human recruiters. Beautiful design.</div>
+        </div>
+      </a>
+      <a href="Naveen_ats.pdf" target="_blank" class="resume-option">
+        <span class="resume-option-icon">📄</span>
+        <div class="resume-option-text">
+          <div class="resume-option-title">ATS Resume</div>
+          <div class="resume-option-sub">Clean, standardized format preferred by recruiters.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- JSZip for source code download easter egg -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>

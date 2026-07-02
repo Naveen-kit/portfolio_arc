@@ -41,7 +41,7 @@ body.hide-cursor, body.hide-cursor * {
 #cursor {
   position: fixed; width: 12px; height: 12px;
   background: var(--cyan); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
+  pointer-events: none; z-index: 20000;
   transform: translate(-50%, -50%);
   transition: width .2s, height .2s, opacity .2s;
   mix-blend-mode: screen;
@@ -50,7 +50,7 @@ body.hide-cursor, body.hide-cursor * {
   position: fixed; width: 36px; height: 36px;
   border: 1.5px solid rgba(0,212,255,0.5);
   border-radius: 50%; pointer-events: none;
-  z-index: 9998; transform: translate(-50%, -50%);
+  z-index: 19999; transform: translate(-50%, -50%);
   transition: transform .12s ease-out, width .25s, height .25s, border-color .25s;
 }
 body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 6px; height: 6px; }
@@ -1307,4 +1307,191 @@ footer {
 /* PC only — hide on touch devices */
 @media (pointer: coarse) {
   .card-click-hint { display: none; }
+}
+
+/* ─── ULTIMATE INTERSTELLAR TRANSITION ─── */
+body.interstellar-active {
+  animation: cosmic-journey 3.1s cubic-bezier(0.25, 1, 0.5, 1) both;
+  overflow: hidden;
+}
+
+/* Cinematic Letterbox */
+body.interstellar-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background: 
+    linear-gradient(to bottom, #000 0%, transparent 10%, transparent 90%, #000 100%);
+  background-size: 100% 200%;
+  animation: cinematic-bars 3.1s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+/* Lightspeed Streaks & Flash */
+body.interstellar-active::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle, #fff 0%, #00d4ff 40%, transparent 80%);
+  mix-blend-mode: color-dodge;
+  pointer-events: none;
+  animation: singularity-blast 3.1s ease-in-out both;
+}
+
+@keyframes cosmic-journey {
+  /* 0 - 1.5s: Tension & Shake */
+  0% { transform: scale(1) translate(0,0); filter: blur(0px) hue-rotate(0deg); }
+  10% { transform: scale(1.01) translate(-2px, 2px); filter: blur(0.5px); }
+  20% { transform: scale(1.02) translate(2px, -2px); }
+  30% { transform: scale(1.01) translate(-4px, 1px); }
+  40% { transform: scale(1.03) translate(4px, -3px); filter: blur(1px); }
+  50% { transform: scale(1.02) translate(-5px, 5px) skewX(2deg); filter: blur(2px) hue-rotate(45deg); }
+  /* 1.5 - 2.0s: The Drop into the black hole */
+  60% { transform: scale(0.3) rotate(-10deg) skewX(10deg); filter: blur(10px) hue-rotate(90deg) contrast(2); }
+  68% { transform: scale(0.01) rotate(-30deg) scaleY(5); filter: blur(30px) hue-rotate(180deg) brightness(2); opacity: 0; }
+  70% { transform: scale(10) rotate(15deg); opacity: 0; }
+  /* Emergence */
+  72% { transform: scale(3) rotate(5deg); filter: blur(20px) hue-rotate(-90deg) brightness(3); opacity: 1; }
+  85% { transform: scale(1.05) translate(-3px, 3px); filter: blur(2px) hue-rotate(0deg) brightness(1); }
+  100% { transform: scale(1) translate(0,0); filter: blur(0px); }
+}
+
+@keyframes cinematic-bars {
+  0% { background-position: 50% 50%; opacity: 0; }
+  10% { opacity: 1; }
+  30% { background-position: 50% 10%; } /* Bars close in */
+  65% { background-position: 50% 0%; } /* Max close */
+  70% { opacity: 0; }
+  75% { opacity: 1; background-position: 50% 0%; }
+  100% { background-position: 50% 50%; opacity: 0; }
+}
+
+@keyframes singularity-blast {
+  0% { opacity: 0; transform: scale(0.5); }
+  65% { opacity: 0.1; transform: scale(1); }
+  68% { opacity: 1; transform: scale(3); } /* BOOM */
+  72% { opacity: 1; transform: scale(4); }
+  85% { opacity: 0; transform: scale(5); }
+  100% { opacity: 0; }
+}
+
+/* Dimension Y mode */
+body.dimension-y {
+  background: url('home.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+body.dimension-y .aurora, 
+body.dimension-y .grid-overlay, 
+body.dimension-y #bg-canvas {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* ─── RESUME MODAL ─── */
+.resume-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 5, 12, 0.8);
+  backdrop-filter: blur(16px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.resume-modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.resume-modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 460px;
+  width: 90%;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.resume-modal-overlay.active .resume-modal-content {
+  transform: translateY(0);
+}
+.resume-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text2);
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.resume-modal-close:hover {
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+}
+.resume-modal-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.resume-modal-desc {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.resume-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.resume-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+.resume-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+  background: rgba(0,212,255,0.05);
+}
+.resume-option-icon {
+  font-size: 24px;
+}
+.resume-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.resume-option-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.resume-option-sub {
+  font-size: 11px;
+  color: var(--text3);
 }
