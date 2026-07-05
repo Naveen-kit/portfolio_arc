@@ -94,7 +94,7 @@ body:has(a:hover) #cursor-ring, body:has(button:hover) #cursor-ring {
 
 /* ─── NAV ─── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 102;
   height: var(--nav-h);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(20px, 5vw, 64px);
@@ -185,13 +185,14 @@ nav.hidden-nav { transform: translateY(-100%); }
 /* ─── MOBILE MENU — Glassmorphic Half-Page Drop ─── */
 .mobile-menu {
   position: fixed;
-  top: var(--nav-h);
+  top: 0;
   left: 0;
   right: 0;
-  height: calc(50vh - var(--nav-h) / 2);
-  z-index: 99;
+  height: 50vh;
+  z-index: 101;
   display: flex;
   flex-direction: column;
+  padding-top: var(--nav-h);
 
   /* Glass background */
   background: rgba(3, 5, 12, 0.65);
@@ -451,6 +452,26 @@ section { position: relative; z-index: 1; }
   background: rgba(0,212,255,0.08); border-color: var(--cyan);
   transform: translateY(-2px);
 }
+#resume-btn {
+  transition: transform .2s, box-shadow .3s, border-color .3s, background-image .3s;
+}
+
+#resume-btn:hover {
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--bg), var(--bg)), conic-gradient(#ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: resume-glow 3s linear infinite;
+  transform: translateY(-2px);
+}
+
+@keyframes resume-glow {
+  0%   { box-shadow: 0 0 8px #ff4545, 0 0 20px rgba(255,69,69,0.3); }
+  25%  { box-shadow: 0 0 8px #00ff99, 0 0 20px rgba(0,255,153,0.3); }
+  50%  { box-shadow: 0 0 8px #006aff, 0 0 20px rgba(0,106,255,0.3); }
+  75%  { box-shadow: 0 0 8px #ff0095, 0 0 20px rgba(255,0,149,0.3); }
+  100% { box-shadow: 0 0 8px #ff4545, 0 0 20px rgba(255,69,69,0.3); }
+}
 .hero-scroll {
   position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -492,35 +513,7 @@ section { position: relative; z-index: 1; }
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15));
 }
-.hero-avatar.glow-active {
-  box-shadow: 
-    0 0 0 3px var(--bg),
-    0 0 0 5px rgba(0,212,255,0.4),
-    0 0 20px rgba(0,212,255,0.5),
-    0 0 40px rgba(124,58,237,0.4),
-    inset 0 0 20px rgba(0,212,255,0.2);
-  filter: brightness(1.2);
-  animation: avatar-glow-pulse 2s ease-in-out infinite;
-}
 
-@keyframes avatar-glow-pulse {
-  0%, 100% { 
-    box-shadow: 
-      0 0 0 3px var(--bg),
-      0 0 0 5px rgba(0,212,255,0.4),
-      0 0 20px rgba(0,212,255,0.5),
-      0 0 40px rgba(124,58,237,0.4),
-      inset 0 0 20px rgba(0,212,255,0.2);
-  }
-  50% { 
-    box-shadow: 
-      0 0 0 3px var(--bg),
-      0 0 0 5px rgba(0,212,255,0.6),
-      0 0 30px rgba(0,212,255,0.7),
-      0 0 60px rgba(124,58,237,0.6),
-      inset 0 0 30px rgba(0,212,255,0.3);
-  }
-}
 .card-name {
   font-family: var(--font-display); font-weight: 700; font-size: 17px;
   letter-spacing: -.02em; margin-bottom: 4px;
