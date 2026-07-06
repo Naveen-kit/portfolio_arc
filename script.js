@@ -153,7 +153,7 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 const skillObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      e.target.querySelectorAll('.skill-fill').forEach(bar => {
+      e.target.querySelectorAll('.skill-fill:not(.gauge-fill)').forEach(bar => {
         bar.style.width = bar.dataset.w + '%';
       });
       skillObs.unobserve(e.target);
@@ -161,6 +161,7 @@ const skillObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: .3 });
 document.querySelectorAll('.skill-group').forEach(g => skillObs.observe(g));
+
 
 // ── COUNTER ANIMATION ──
 function animateCounters() {
