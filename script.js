@@ -518,10 +518,10 @@ if (bgm && bgmBtn && bgmIcon && songPicker) {
   function toggleBgm() {
     if (isPlaying) {
       bgm.pause();
-      bgmIcon.textContent = '🎵';
+      bgmIcon.innerHTML = '🎵';
     } else {
       bgm.play().catch(e => console.log('Playback prevented', e));
-      bgmIcon.textContent = '⏸️';
+      bgmIcon.innerHTML = '<img src="play_button_ncs.gif" alt="Playing" class="bgm-playing-gif">';
     }
     isPlaying = !isPlaying;
   }
@@ -601,7 +601,7 @@ if (bgm && bgmBtn && bgmIcon && songPicker) {
 
       bgm.play().then(() => {
         isPlaying = true;
-        bgmIcon.textContent = '⏸️';
+        bgmIcon.innerHTML = '<img src="play_button_ncs.gif" alt="Playing" class="bgm-playing-gif">';
       }).catch(e => console.log('Playback prevented', e));
 
       // Show the wave for 1.5s before closing
