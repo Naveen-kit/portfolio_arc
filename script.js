@@ -521,7 +521,7 @@ if (bgm && bgmBtn && bgmIcon && songPicker) {
       bgmIcon.innerHTML = '🎵';
     } else {
       bgm.play().catch(e => console.log('Playback prevented', e));
-      bgmIcon.innerHTML = '<img src="play_button_ncs.gif" alt="Playing" class="bgm-playing-gif">';
+      bgmIcon.innerHTML = '<img src="assets/images/play_button_ncs.gif" alt="Playing" class="bgm-playing-gif">';
     }
     isPlaying = !isPlaying;
   }
@@ -601,7 +601,7 @@ if (bgm && bgmBtn && bgmIcon && songPicker) {
 
       bgm.play().then(() => {
         isPlaying = true;
-        bgmIcon.innerHTML = '<img src="play_button_ncs.gif" alt="Playing" class="bgm-playing-gif">';
+        bgmIcon.innerHTML = '<img src="assets/images/play_button_ncs.gif" alt="Playing" class="bgm-playing-gif">';
       }).catch(e => console.log('Playback prevented', e));
 
       // Show the wave for 1.5s before closing

@@ -1468,7 +1468,7 @@ body.interstellar-active::after {
 
 /* Dimension Y mode */
 body.dimension-y {
-  background: url('home.jpg') no-repeat center center fixed;
+  background: url('assets/images/home.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 body.dimension-y .aurora, 
