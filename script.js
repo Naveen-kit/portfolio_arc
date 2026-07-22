@@ -1,3 +1,8 @@
+// ── CONFIG & UTILITIES ──
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IS_TOUCH = window.matchMedia('(pointer: coarse)').matches;
+const lerp = (a, b, t) => a + (b - a) * t;
+
 // ── LOADER ──
 document.body.classList.add('hide-cursor');
 let pct = 0;
@@ -5,28 +10,66 @@ const loader = document.getElementById('loader');
 const loaderNum = document.getElementById('loader-num');
 let loaded = false;
 window.addEventListener('load', () => { loaded = true; });
-const iv = setInterval(() => {
-  if (!loaded && pct > 90) return; // Wait for full page load before hitting 100%
+const loadIv = setInterval(() => {
+  if (!loaded && pct > 90) return;
   pct = Math.min(pct + Math.random() * 18, 100);
   loaderNum.textContent = Math.floor(pct) + '%';
   if (pct >= 100) {
-    clearInterval(iv);
-    setTimeout(() => loader.classList.add('hidden'), 200);
+    clearInterval(loadIv);
+    setTimeout(() => loader.classList.add('hidden'), 250);
+    setTimeout(() => {
+      document.body.classList.remove('hide-cursor');
+    }, 1300);
   }
 }, 80);
 
-// ── CURSOR ──
+// ── CURSOR — spring-damped dual element ──
 const cur = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+const dotPos = { x: mouse.x, y: mouse.y };
+const ringPos = { x: mouse.x, y: mouse.y };
+
+document.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+});
+
+document.addEventListener('mousedown', () => document.body.classList.add('cursor-press'));
+document.addEventListener('mouseup', () => document.body.classList.remove('cursor-press'));
+
 function animCursor() {
-  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-  rx += (mx - rx) * .14; ry += (my - ry) * .14;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  // Snappy dot
+  dotPos.x = lerp(dotPos.x, mouse.x, 0.55);
+  dotPos.y = lerp(dotPos.y, mouse.y, 0.55);
+  // Lagging ring
+  ringPos.x = lerp(ringPos.x, mouse.x, 0.15);
+  ringPos.y = lerp(ringPos.y, mouse.y, 0.15);
+
+  cur.style.transform = `translate3d(${dotPos.x}px, ${dotPos.y}px, 0) translate(-50%, -50%)`;
+  ring.style.transform = `translate3d(${ringPos.x}px, ${ringPos.y}px, 0) translate(-50%, -50%)`;
+
   requestAnimationFrame(animCursor);
 }
-animCursor();
+if (!IS_TOUCH) animCursor();
+
+// ── GLOW-FOLLOW for cards (radial gradient tracking cursor) ──
+function makeGlowFollow(el) {
+  if (IS_TOUCH) return;
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty('--mx', x + '%');
+    el.style.setProperty('--my', y + '%');
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.setProperty('--mx', '50%');
+    el.style.setProperty('--my', '0%');
+  });
+}
+document.querySelectorAll('.project-card').forEach(makeGlowFollow);
 
 // ── TYPING ANIMATION ──
 const phrases = ['AI • Linux • Development', 'Automation • System Computing','⏪Reverse Engineering','🏗️Building the Future'];
@@ -638,5 +681,41 @@ if (resumeBtn && resumeModal && resumeModalClose) {
     if (e.target === resumeModal) {
       resumeModal.classList.remove('active');
     }
+  });
+}
+
+// ── PROJECT CARD 3D TILT — subtle ──
+if (!IS_TOUCH && !REDUCED_MOTION) {
+  document.querySelectorAll('.project-card').forEach(card => {
+    let raf = null;
+    let tRX = 0, tRY = 0, cRX = 0, cRY = 0;
+    let active = false;
+
+    function loop() {
+      cRX = lerp(cRX, tRX, 0.1);
+      cRY = lerp(cRY, tRY, 0.1);
+      card.style.transform = `translateY(-10px) perspective(800px) rotateY(${cRY}deg) rotateX(${cRX}deg)`;
+      if (active || Math.abs(tRX - cRX) > 0.01 || Math.abs(tRY - cRY) > 0.01) {
+        raf = requestAnimationFrame(loop);
+      } else {
+        raf = null;
+        card.style.transform = '';
+      }
+    }
+
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      tRY = x * 6;
+      tRX = -y * 6;
+      active = true;
+      if (!raf) loop();
+    });
+
+    card.addEventListener('mouseleave', () => {
+      tRX = 0; tRY = 0; active = false;
+      if (!raf) loop();
+    });
   });
 }
